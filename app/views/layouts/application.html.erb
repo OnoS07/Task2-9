@@ -15,22 +15,46 @@
         <div class="container">
           <span class="navbar-brand">My Book</span>
           <ul class="nav">
-            <li class="nav-item">
-              <%= link_to "Home", "/", class:"nav-link" %>
+          <% if user_signed_in? %>
+              <%= link_to "/" , class:"nav-link" do %>
+              <i class="fas fa-home"> Home</i><% end %>
             </li>
             <li class="nav-item">
-              <%= link_to "About", "/home/about", class:"nav-link" %>
+              <%= link_to "/home/about", class:"nav-link" do %>
+              <i class="fas fa-link"> About</i><% end %>
             </li>
             <li class="nav-item">
-              <%= link_to "Sign_up", new_user_registration_path ,class:"nav-link" %>
+              <%= link_to new_user_registration_path ,class:"nav-link" do %>
+              <i class="fas fa-user-plus"> Sign_up</i><% end %>
             </li>
             <li class="nav-item">
-              <%= link_to "Sign_in", new_user_session_path, class:"nav-link" %>
+              <%= link_to destroy_user_session_path, method: :delete , class:"nav-link" do %>
+              <i class="fas fa-sign-out-alt"> logout</i><% end %>
+          <% else %>
+            <li class="nav-item">
+              <%= link_to "/" , class:"nav-link" do %>
+              <i class="fas fa-home"> Home</i><% end %>
             </li>
+            <li class="nav-item">
+              <%= link_to "/home/about", class:"nav-link" do %>
+              <i class="fas fa-link"> About</i><% end %>
+            </li>
+            <li class="nav-item">
+              <%= link_to new_user_registration_path ,class:"nav-link" do %>
+              <i class="fas fa-user-plus"> Sign_up</i><% end %>
+            </li>
+            <li class="nav-item">
+              <%= link_to new_user_session_path, class:"nav-link" do %>
+              <i class="fas fa-sign-in-alt"> login</i><% end %>
+            </li>
+          <% end %>
           </ul>
         </div>
       </nav>
     </header>
+    <div class="top-50px"></div>
+    <div class="container">
     <%= yield %>
+    </div>
   </body>
 </html>
