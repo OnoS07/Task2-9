@@ -5,4 +5,8 @@ Rails.application.routes.draw do
   get "/" => "users#home"
   get "/home/about" => "users#about"
 
+resources :users, only:[:show, :edit, :update]
+
+resources :books
+
 end

@@ -16,16 +16,16 @@
           <span class="navbar-brand">My Book</span>
           <ul class="nav">
           <% if user_signed_in? %>
-              <%= link_to "/" , class:"nav-link" do %>
+              <%= link_to user_path(current_user) , class:"nav-link" do %>
               <i class="fas fa-home"> Home</i><% end %>
             </li>
             <li class="nav-item">
-              <%= link_to "/home/about", class:"nav-link" do %>
-              <i class="fas fa-link"> About</i><% end %>
+              <%= link_to "#", class:"nav-link" do %>
+              <i class="fas fa-users"> Users</i><% end %>
             </li>
             <li class="nav-item">
-              <%= link_to new_user_registration_path ,class:"nav-link" do %>
-              <i class="fas fa-user-plus"> Sign_up</i><% end %>
+              <%= link_to "#" ,class:"nav-link" do %>
+              <i class="fas fa-book-reader"> Books</i><% end %>
             </li>
             <li class="nav-item">
               <%= link_to destroy_user_session_path, method: :delete , class:"nav-link" do %>
@@ -52,7 +52,7 @@
         </div>
       </nav>
     </header>
-    <div class="top-50px"></div>
+    <div style="margin-top: 20px;"></div>
     <div class="container">
     <%= yield %>
     </div>
