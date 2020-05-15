@@ -1,3 +1,8 @@
+<% flash.each do |key, value| %>
+  <div style="color: red">
+    <%= content_tag(:div, value, class: "#{key}") %>
+  </div>
+<% end %>
 <h2>Log in</h2>
 
 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
