@@ -14,6 +14,7 @@
 //= require jquery3
 //= require rails-ujs
 //= require activestorage
+//= require jquery.turbolinks
 //= require turbolinks
 //= require_tree .
 
@@ -21,7 +22,7 @@
 //= require popper
 //= require bootstrap-sprockets
 
-$(document).ready(function () {
+$(function () {
   $(".about-contents").skippr({
       // スライドショーの変化 ("fade" or "slide")
       transition : 'fade',
