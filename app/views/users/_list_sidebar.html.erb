@@ -1,0 +1,62 @@
+<% if @book_new.errors.any? %>
+ <h2><%= @book_new.errors.count %>error prohibited this obj from being saved</h2>
+ <ul>
+  <% @book_new.errors.full_messages.each do |message| %>
+   <li> <%= message %> </li>
+   <% end %>
+  </ul>
+<% end %>
+<div class="col-md-4">
+
+<% if flash[:notice] %>
+ 	<div class="flash", style="color: green;" >
+ 	<%= flash[:notice]%>
+ 	</div>
+<% end %>
+
+<% if flash[:comment] %>
+ 	<div class="flash", style="color: red;" >
+ 	<%= flash[:comment]%>
+ 	</div>
+<% end %>
+
+		<% if @user == current_user %>
+			<h1 style="color: navy">My Info</h1>
+		<% else %>
+			<h1>User Info</h1>
+		<% end %>
+			<div style="text-align: center;" >
+			<%= attachment_image_tag user, :profile_image, size:"100x100", format:"jpg",
+			fallback:"no_image.jpg" ,style:"margin-bottom: 10px; border-radius:50%" %>
+			</div>
+			<table class="table table-bordered">
+			<tr>
+				<td class="table-info">Name</td>
+				<td><%= user.name %></td>
+			</tr>
+			<tr>
+				<td class="table-primary">Introduction</td>
+				<td><%= user.introduction %></td>
+			</tr>
+			</table>
+			<% if current_user.id == user.id %>
+				<%= link_to edit_user_path(current_user) do %>
+				<button type="button" class="btn btn-secondary btn-block">
+					<i class="fas fa-wrench" style="color:skyblue;"></i></button><% end %>
+			<% end %>
+
+		<h1 style="margin-top: 30px;">New Book</h1>
+			<%= form_for(book_new) do |f| %>
+				<div class="field">
+					<%= f.label :title %><br>
+					<%= f.text_field :title, autofocus: true ,class:"form-control" %>
+				</div>
+				<div class="field">
+					<%= f.label :opinion  %> <br>
+					<%= f.text_area :body, autofocus: true ,class:"form-control" %>
+				</div>
+				<div class="field">
+					<%= f.submit "Create Book" ,class:"btn btn-success btn-block" %>
+				</div>
+			<% end %>
+	</div>

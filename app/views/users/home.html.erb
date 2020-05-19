@@ -1,0 +1,27 @@
+<% flash.each do |key, value| %>
+<div style="color: green;">
+  <%= content_tag(:div, value, class: "#{key}") %>
+</div>
+<% end %>
+<div class="home_content">
+	<span>B O O K ! !</span>
+</div>
+<div class="row">
+	<div class="col-md-6 offset-md-3">
+
+<h1>welcome to My Book !!</h1>
+<p>In Bookers,<br>
+you can share and exchange your opinions , inpressions , and <br>
+about various books!</p>
+
+<div class="col-md-6 offset-md-3">
+	<%= link_to new_user_registration_path do %>
+	<i class="fas fa-user-plus btn btn-block btn-primary"> Sign_up</i><% end %>
+	<%= link_to new_user_session_path do %>
+	<i class="fas fa-sign-in-alt btn btn-success btn-block", style="margin-top: 10px">
+		 login</i><% end %>
+</div>
+
+	</div>
+</div>
+

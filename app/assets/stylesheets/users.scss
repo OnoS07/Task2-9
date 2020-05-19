@@ -1,0 +1,40 @@
+// Place all the styles related to the users controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.home_content{
+	background-image:url(books.jpg);
+	background-size: cover;
+	background-position: center;
+	width: 100%;
+	height: 300px;
+	display: flex;
+	justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 60px;
+    font-family: impact;
+}
+
+.about-contents{
+	border: 5px solid black;
+	height: 400px;
+    font-size: 60px;
+    font-family: impact;
+}
+.mybook_image{
+	background-image: url(mybook.jpg);
+	display: flex;
+	align-items: flex-end;
+
+}
+.users_image{
+	background-image: url(users.jpg);
+	display: flex;
+	align-items: flex-end;
+}
+.book_image{
+	background-image: url(book.jpg);
+	display: flex;
+	align-items: flex-end;
+}
