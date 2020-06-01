@@ -9,6 +9,7 @@
 				<td>Title</td>
 				<td>Opinipon</td>
 				<td>Comments</td>
+				<td>Like</td>
 				<% if @user == current_user %>
 				<td></td><td></td>
 				<% end %>
@@ -20,7 +21,9 @@
 					<%= @user.name%> <% end %> </td>
 				<td class="align-middle"><%= @book.title %></td>
 				<td class="align-middle"><%= @book.body %></td>
-				<td class="align-middle"><%= @book.book_comments.count %>件</td>
+				<td class="align-middle">コメント:<%= @book.book_comments.count %></td>
+				<td class="align-middle"><i class="fas fa-heart"></i>
+					<%= @book.favorites.count %></td>
 				<% if @user == current_user %>
 					<td class="align-middle">
 						<%= link_to "Edit" ,edit_book_path(@book),

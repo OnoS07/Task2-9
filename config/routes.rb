@@ -8,7 +8,8 @@ Rails.application.routes.draw do
 resources :users, only:[:show, :edit, :update, :index]
 
 resources :books do
-	resource :book_comments, only:[:create, :destroy]
+	resources :book_comments, only:[:create, :destroy]
+	resource :favorites, only:[:create, :destroy]
 end
 
 end
