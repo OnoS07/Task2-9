@@ -12,7 +12,6 @@
 				<td></td>
 				<td>Title</td>
 				<td>Opinion</td>
-				<td>Comments</td>
 			</tr>
 			<% @books.each do |book| %>
 			<tr>
@@ -23,7 +22,6 @@
 				<td class="align-middle"><%= link_to book_path(book) do %>
 					<%= book.title %><% end %></td>
 				<td class="align-middle"><%= book.body %></td>
-				<td class="align-middle"><%= book.book_comments.count %>件</td>
 			</tr>
 			<% end %>
 		</table>
