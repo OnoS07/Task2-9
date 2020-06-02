@@ -20,58 +20,72 @@
  	</div>
 <% end %>
 
-		<% if @user == current_user %>
-			<h1 style="color: navy">My Info</h1>
-		<% else %>
-			<h1>User Info</h1>
-		<% end %>
-			<div style="text-align: center;" >
-			<%= attachment_image_tag user, :profile_image, size:"100x100", format:"jpg",
-			fallback:"no_image.jpg" ,style:"margin-bottom: 10px; border-radius:50%" %>
-			</div>
-			<table class="table table-bordered">
-			<tr>
-				<td class="table-info">Name</td>
-				<td><%= user.name %></td>
-			</tr>
-			<tr>
-				<td class="table-primary">Introduction</td>
-				<td><%= user.introduction %></td>
-			</tr>
-			</table>
+<% if @user == current_user %>
+	<h1 style="color: navy">My Info</h1>
+<% else %>
+	<h1>User Info</h1>
+<% end %>
+<div style="text-align: center;" >
+	<%= attachment_image_tag user, :profile_image, size:"100x100", format:"jpg",
+	fallback:"no_image.jpg" ,style:"margin-bottom: 10px; border-radius:50%" %>
+</div>
+<table class="table table-bordered">
+	<tr>
+		<td class="table-info">Name</td>
+		<td><%= user.name %></td>
+	</tr>
+	<tr>
+		<td class="table-primary">Introduction</td>
+		<td><%= user.introduction %></td>
+	</tr>
+	<tr>
+		<td class="table-info" >follows</td>
+		<td>
+			<%= link_to follow_path(user) do %>
+			<%= user.followings.count %> <% end %>
+		</td>
+	</tr>
+	<tr>
+		<td class="table-info" >followers</td>
+		<td>
+			<%= link_to follower_path(user) do %>
+			<%= user.followers.count %> <% end %>
+		</td>
+	</tr>
+</table>
 
-			<% unless current_user == user %>
-			  <% if current_user.following?(user) %>
-			    <%= form_for(current_user.relationships.find_by(follow_id: user.id), html: { method: :delete }) do |f| %>
-			      <%= hidden_field_tag :follow_id, user.id %>
-			      <%= f.submit 'Unfollow', class: 'btn btn-danger btn-block' %>
-			    <% end %>
-			  <% else %>
-			    <%= form_for(current_user.relationships.build) do |f| %>
-			      <%= hidden_field_tag :follow_id, user.id %>
-			      <%= f.submit 'Follow', class: 'btn btn-primary btn-block' %>
-			    <% end %>
-			  <% end %>
-			<% end %>
+<% unless current_user == user %>
+  <% if current_user.following?(user) %>
+    <%= form_for(current_user.relationships.find_by(follow_id: user.id), html: { method: :delete }) do |f| %>
+      <%= hidden_field_tag :follow_id, user.id %>
+      <%= f.submit 'フォローを外す', class: 'btn btn-danger btn-block' %>
+    <% end %>
+  <% else %>
+    <%= form_for(current_user.relationships.build) do |f| %>
+      <%= hidden_field_tag :follow_id, user.id %>
+      <%= f.submit 'フォローする', class: 'btn btn-primary btn-block' %>
+    <% end %>
+  <% end %>
+<% end %>
 
-			<% if current_user.id == user.id %>
-				<%= link_to edit_user_path(current_user) do %>
-				<button type="button" class="btn btn-secondary btn-block">
-					<i class="fas fa-wrench" style="color:skyblue;"></i></button><% end %>
-			<% end %>
+<% if current_user.id == user.id %>
+	<%= link_to edit_user_path(current_user) do %>
+	<button type="button" class="btn btn-secondary btn-block">
+		<i class="fas fa-wrench" style="color:skyblue;"></i></button><% end %>
+<% end %>
 
-		<h1 style="margin-top: 30px;">New Book</h1>
-			<%= form_for(book_new) do |f| %>
-				<div class="field">
-					<%= f.label :title %><br>
-					<%= f.text_field :title, autofocus: true ,class:"form-control" %>
-				</div>
-				<div class="field">
-					<%= f.label :opinion  %> <br>
-					<%= f.text_area :body, autofocus: true ,class:"form-control" %>
-				</div>
-				<div class="field">
-					<%= f.submit "Create Book" ,class:"btn btn-success btn-block" %>
-				</div>
-			<% end %>
+<h1 style="margin-top: 30px;">New Book</h1>
+<%= form_for(book_new) do |f| %>
+	<div class="field">
+		<%= f.label :title %><br>
+		<%= f.text_field :title, autofocus: true ,class:"form-control" %>
 	</div>
+	<div class="field">
+		<%= f.label :opinion  %> <br>
+		<%= f.text_area :body, autofocus: true ,class:"form-control" %>
+	</div>
+	<div class="field">
+		<%= f.submit "Create Book" ,class:"btn btn-success btn-block" %>
+	</div>
+<% end %>
+</div>

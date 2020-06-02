@@ -13,6 +13,14 @@ class UsersController < ApplicationController
 	def about
 	end
 
+	def follow
+		@user = User.find(params[:id])
+	end
+
+	def follower
+		@user = User.find(params[:id])
+	end
+
 	def index
 		@user = User.find(current_user.id)
 		@book_new = Book.new

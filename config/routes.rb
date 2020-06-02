@@ -4,6 +4,8 @@ Rails.application.routes.draw do
   root "users#home"
   get "/" => "users#home"
   get "/home/about" => "users#about"
+  get "/users/:id/follow" => "users#follow", as: 'follow'
+  get "/users/:id/follower" => "users#follower", as: 'follower'
 
 resources :users, only:[:show, :edit, :update, :index]
 resources :relationships, only: [:create, :destroy]
