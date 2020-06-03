@@ -1,0 +1,75 @@
+<h1>検索結果</h1>
+<% if @model == "user" %>
+	<table class="table">
+		<tr class="table-info">
+			<td>Image</td>
+			<td>Name</td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+		</tr>
+		<% @datas.each do |date| %>
+		<tr>
+			<td><%= attachment_image_tag date, :profile_image, size:"50x50",
+					format:"jpg", fallback:"no_image.jpg" %></td>
+			<td class="align-middle"><%= date.name %></td>
+			<td class="align-middle">フォロー数<%= date.followings.count %></td>
+			<td class="align-middle">フォロワー数<%= date.followers.count %></td>
+			<td class="align-middle">
+				<% unless current_user == date %>
+					<% if current_user.following?(date) %>
+						<%= form_for(current_user.relationships.find_by(follow_id: date.id),
+							html:{method: :delete}) do |f|  %>
+							<%= hidden_field_tag :follow_id, date.id %>
+							<%= f.submit "フォローを外す", class:"btn btn-danger" %>
+						<% end %>
+					<% else %>
+						<%= form_for(current_user.relationships.build) do |f| %>
+							<%= hidden_field_tag :follow_id, date.id %>
+							<%= f.submit "フォローする", class:"btn btn-primary" %>
+						<% end %>
+					<% end %>
+				<% end %>
+			</td>
+			<td class="align-middle"><%= link_to "show" , user_path(date) %></td>
+		</tr>
+		<% end %>
+	</table>
+<% else%>
+<table class="table">
+	<tr class="table-info">
+		<td>User</td>
+		<td>Title</td>
+		<td>Opinion</td>
+		<td>Comments</td>
+		<td>Like</td>
+	</tr>
+	<% @datas.each do |date| %>
+	<tr>
+		<td><%= link_to user_path(date.user) do %>
+			<%= attachment_image_tag date.user, :profile_image, size:"50x50",
+				format:"jpg", fallback:"no_image.jpg" %> <% end %>
+		</td>
+		<td class="align-middle">
+			<%= link_to book_path(date) do %>
+			<%= date.title %><% end %></td>
+		<td class="align-middle"><%= date.body %></td>
+		<td class="align-middle">
+			<%= link_to book_path(date) do %>
+			<%= date.book_comments.count %>件<% end %>
+		</td>
+		<td class="align-middle">
+			<% if date.favorited_by?(current_user) %>
+				<%= link_to book_favorites_path(date), method: :delete do %>
+				<i class="fas fa-heart", style="color:red;"></i><% end %>
+			<% else %>
+				<%= link_to book_favorites_path(date), method: :post do %>
+				<i class="fas fa-heart", style="color: silver"></i><% end %>
+			<% end %>
+			<%= date.favorites.count %>
+		</td>
+	</tr>
+	<% end %>
+</table>
+<% end %>
