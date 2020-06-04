@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
   get '/search' => "search#search"
+  post '/books/:book_id/favorites' => "favorites#create"
+  delete '/books/:book_id/favorites' => "favorites#destroy"
   devise_for :users
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   root "users#home"
