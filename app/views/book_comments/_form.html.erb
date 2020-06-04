@@ -1,0 +1,8 @@
+<%= form_with(model: [book, comment] ) do |f| %>
+	<div class="field">
+		<%= f.text_area :comment, autofocus: true, class:"form-control" %>
+	</div>
+	<div class="field">
+		<%= f.submit "Create Comment" ,class:"btn btn-primary" %>
+	</div>
+<% end %>

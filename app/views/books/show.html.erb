@@ -22,15 +22,8 @@
 				<td class="align-middle"><%= @book.title %></td>
 				<td class="align-middle"><%= @book.body %></td>
 				<td class="align-middle">コメント:<%= @book.book_comments.count %></td>
-				<td class="align-middle">
-					<% if @book.favorited_by?(current_user) %>
-						<%= link_to book_favorites_path(@book), method: :delete do %>
-						<i class="fas fa-heart", style="color:red;"></i><% end %>
-					<% else %>
-						<%= link_to book_favorites_path(@book), method: :post do %>
-						<i class="fas fa-heart", style="color: silver"></i><% end %>
-					<% end %>
-					<%= @book.favorites.count %></td>
+				<td class="align-middle", id="favorite-<%= @book.id %>">
+					<%= render "favorites/favorites", book: @book %>
 				<% if @user == current_user %>
 					<td class="align-middle">
 						<%= link_to "Edit" ,edit_book_path(@book),
@@ -41,44 +34,12 @@
 				<% end %>
 			</tr>
 		</table>
-
-		<h2 style="margin-top: 30px" >Comments</h2>
-		<table class="table table-sm">
-			<tr class="table-primary">
-				<td>User</td>
-				<td>Comments</td>
-				<td>Day</td>
-				<td></td>
-			</tr>
-		<% @book.book_comments.each do |book_comment| %>
-			<tr>
-				<td class="align-middle"><%= link_to user_path(book_comment.user) do %>
-					<%= attachment_image_tag book_comment.user, :profile_image, size:"40x40",
-						format:"jpg", fallback:"no_image.jpg" %><br>
-						<%= book_comment.user.name%> <% end %>
-				</td>
-				<td class="align-middle"><%= book_comment.comment %></td>
-				<td class="align-middle"><%= book_comment.created_at.strftime('%Y/%m/%d') %></td>
-				<% if book_comment.user_id == current_user.id %>
-					<td class="align-middle">
-						<%= link_to book_book_comments_path(@book, book_comment),
-							method: :delete, class:"btn btn-danger" do %>
-							<i class="fas fa-trash"></i><% end %></td>
-				<% end %>
-			</tr>
-		<% end %>
-		</table>
+		<div id="comments_area">
+			<%= render "book_comments/index", comments: @comments %>
+		</div>
 
 		<h3>New Comment Form</h3>
-		<%= form_for [@book,@book_comment] do |f| %>
-			<div class="field">
-				<%= f.text_area :comment, autofocus: true, class:"form-control"%>
-			</div>
-			<div class="field">
-				<%= f.submit "Create Comment" ,class:"btn btn-primary" %>
-			</div>
-		<% end %>
-
+		<%= render partial: "book_comments/form", locals: {book: @book, comment: @comment} %>
 	</div>
 
 </div>

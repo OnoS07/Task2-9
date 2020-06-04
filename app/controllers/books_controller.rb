@@ -19,7 +19,8 @@ class BooksController < ApplicationController
 		@user = User.find(@book.user_id)
 		@book_new = Book.new
 
-		@book_comment = BookComment.new
+	    @comment = BookComment.new
+	    @comments = @book.book_comments
 	end
 
 	def new
