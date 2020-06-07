@@ -71,7 +71,10 @@
 <% if current_user.id == user.id %>
 	<%= link_to edit_user_path(current_user) do %>
 	<button type="button" class="btn btn-secondary btn-block">
-		<i class="fas fa-wrench" style="color:skyblue;"></i></button><% end %>
+		<i class="fas fa-wrench" style="color:skyblue;"></i></button>
+	<% end %>
+	<%= user.postal_code %>
+	<%= user.city%>
 <% end %>
 
 <h1 style="margin-top: 30px;">New Book</h1>
