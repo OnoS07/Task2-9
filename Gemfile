@@ -72,3 +72,5 @@ gem 'jquery-rails'
 gem 'font-awesome-sass'
 
 gem 'jquery-turbolinks'
+
+gem 'jp_prefecture'
