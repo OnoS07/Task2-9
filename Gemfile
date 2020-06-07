@@ -74,3 +74,5 @@ gem 'font-awesome-sass'
 gem 'jquery-turbolinks'
 
 gem 'jp_prefecture'
+
+gem 'geocoder'
