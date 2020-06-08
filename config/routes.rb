@@ -10,8 +10,11 @@ Rails.application.routes.draw do
   get "/users/:id/follow" => "users#follow", as: 'follow'
   get "/users/:id/follower" => "users#follower", as: 'follower'
 
+  get "chat/:id" => "chats#show", as: "chat"
+
 resources :users, only:[:show, :edit, :update, :index]
 resources :relationships, only: [:create, :destroy]
+resources :chats, only: [:create]
 
 resources :books do
 	resources :book_comments, only:[:create, :destroy]

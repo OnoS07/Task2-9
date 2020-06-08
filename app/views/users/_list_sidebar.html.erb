@@ -55,6 +55,7 @@
 </table>
 
 <% unless current_user == user %>
+  <%= link_to "chatを始める", chat_path(user.id) %>
   <% if current_user.following?(user) %>
     <%= form_for(current_user.relationships.find_by(follow_id: user.id), html: { method: :delete }) do |f| %>
       <%= hidden_field_tag :follow_id, user.id %>
@@ -73,8 +74,6 @@
 	<button type="button" class="btn btn-secondary btn-block">
 		<i class="fas fa-wrench" style="color:skyblue;"></i></button>
 	<% end %>
-	<%= user.postal_code %>
-	<%= user.city%>
 <% end %>
 
 <h1 style="margin-top: 30px;">New Book</h1>
